@@ -53,8 +53,8 @@ if __name__=='__main__':
 
         ax.plot(secs, eles, linewidth=2.0)
 
-        plt.show()
-        # plt.savefig(fname = directory+'/'+name[:-4]+'_altitud.pdf',format = 'pdf',
+        # plt.show()
+        plt.savefig(fname = directory+'/'+name[:-4]+'_altitud.pdf',format = 'pdf',
                 # transparent = True,bbox_inches='tight')
 
         fig, ax = plt.subplots()
@@ -62,8 +62,8 @@ if __name__=='__main__':
         ax.plot(np.array(secs)/3600, vel*3600, linewidth=1.0)
         ax.plot((np.array(secs)[:801-w]+secs[30])/3600, vel_mediamovil*3600, linewidth=2.0,color='red')
 
-        plt.show()
-        # plt.savefig(fname = directory+'/'+name[:-4]+'_velocidad.pdf',format = 'pdf',
+        # plt.show()
+        plt.savefig(fname = directory+'/'+name[:-4]+'_velocidad.pdf',format = 'pdf',
                 # transparent = True,bbox_inches='tight')
         # print(np.array(secs)[:801-w]/3600+60/3600)
         # print(vel_mediamovil*3600)
