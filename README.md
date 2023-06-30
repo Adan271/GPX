@@ -10,22 +10,26 @@ Cada alumno deberá mandar al profesor su archivo GPX para que pueda transformar
 ## Explicación del programa
 El programa lee todos los archivos `.gpx` de una carpeta dada y extrae los tiempos, latitudes, longitudes y altitudes de cada registro mediante expresiones regulares. A partir de las latitudes y longitudes, se calculan las distancias recorridas utilizando la fórmula
 
-$\Delta (x1,x2) = R * 2 * arctan(sqrt((1-a)/a))$
+$\Delta (x1,x2) = R \cdot 2 \cdot \arctan(\sqrt{(1-a)/a})$
+
 siendo
 
-$a = sin(\Delta lat/2)^2 + cos(lat_1) * cos(lat_2) * sin(\Delta lon/2)^2$
-$\Delta lat = lat_2 - lat_1$
-$\Delta lon = lon_2 - lon_1$
+$a = \sin(\Delta \text{lat}/2)^2+\cos(\text{lat}_1)\cdot\cos(\text{lat}_2)\cdot\sin(\Delta\text{lon}/2)^2$
+
+$\Delta \text{lat} = \text{lat}_2-\text{lat}_1,\quad \text{(en radianes)}$
+
+$\Delta \text{lon} = \text{lon}_2-\text{lon}_1,\quad \text{(en radianes)}$
 
 
-donde las latitudes y longitudes se expresan en radianes y R es el radio de la tierra en kilómetros.
+y R el radio de la tierra en kilómetros.
 
 Con las distancias entre cada par de registros sucesivos y los tiempos de éstos podemos calcular la velocidad. Para evitar una excesiva variabilidad en ésta se exporta la velocidad después de haber aplicado una media móvil. Esto es:
 
-$\overline{v}_i = \frac{1}{w+1}\sum_{j=i}^{i+w} v_j, \quad i = 1,\dots,n-w$
+$\overline{v}_i =\frac{1}{w+1} \sum_{j=i}^{i+w} v_j$,   $i = 1,\dots,n-w$
 
 
-Siendo v el vector de velocidades original, n su longitud, v̄ el resultado de la transformación y w el tamaño elegido para hacer la media $(1 ≤ w ≤ n)$. Esta transformación es necesaria ya que la baja precisión del GPS hace que los registros tengan mucho ruido haciéndose especialmente molesto en el caso de la velocidad:
+
+Siendo $v$ el vector de velocidades original, $n$ su longitud, $\overline{v}$ el resultado de la transformación y $w$ el tamaño elegido para hacer la media ($1\le w \le n$). Esta transformación es necesaria ya que la baja precisión del GPS hace que los registros tengan mucho ruido haciéndose especialmente molesto en el caso de la velocidad
 
 ![Velocidad registrada por el GPS (en gris) y media móvil de ésta (en azul), con w=60.](media.png)
 
